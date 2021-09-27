@@ -1,3 +1,4 @@
 pandas
 bokeh == 2.2.2
 matplotlib
+streamlit == 0.89.0
