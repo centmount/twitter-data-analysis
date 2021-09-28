@@ -23,6 +23,7 @@ import os
 
 # パスワードでログイン
 def login():
+    global value
     value = st.text_input('パスワードを入力してください:', value='', type='password')
     while value != st.secrets['password']:
     st.error('正しいパスワードを入力してください')
