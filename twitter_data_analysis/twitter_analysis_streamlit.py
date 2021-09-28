@@ -22,7 +22,7 @@ from datetime import datetime, timedelta
 import os
 
 # パスワードでログイン
-value = st.text_input('パスワードを入力してください:', value='', type='password')
+value = st.text_input('パスワードを入力してください:', type='password')
 
 def login():
     global value
