@@ -20,6 +20,17 @@ from bokeh.models import DataSource, RangeTool, HoverTool, DatetimeTickFormatter
 import bokeh.palettes as bp
 from datetime import datetime, timedelta
 import os
+import time
+
+# パスワード入力
+value = st.text_input('パスワードを入力してください:', type='password')
+
+def login():
+    while value != st.secrets['password']:
+        st.error('正しいパスワードを入力してください')
+    st.write('パスワードを確認しました！')
+
+login()
 
 # 現在時刻
 now_time = datetime.now() + timedelta(hours=9)
