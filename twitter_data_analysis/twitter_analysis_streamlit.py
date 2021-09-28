@@ -21,13 +21,11 @@ import bokeh.palettes as bp
 from datetime import datetime, timedelta
 import os
 
-# ページレイアウトをワイドに設定
-st.set_page_config(layout='wide')
-
 # パスワードでログイン
 value = st.text_input('パスワードを入力してください:', value='', type='password')
 if value != st.secrets['password']:
     st.error('正しいパスワードを入力してください')
+    return
 
 # 現在時刻
 now_time = datetime.now() + timedelta(hours=9)
