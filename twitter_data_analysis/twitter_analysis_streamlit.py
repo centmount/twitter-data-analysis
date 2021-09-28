@@ -101,7 +101,7 @@ source = ColumnDataSource(data = dict(x = x, y = y, date=date))
 hover_tool = HoverTool(tooltips = [('date and time', '@date'), ('followers', '@y')], mode='mouse')
 
 # グラフ全体の設定
-fig1 = figure(tools=[hover_tool], title='最新フォロワー数', plot_width=400, plot_height=200, 
+fig1 = figure(tools=[hover_tool], title='最新フォロワー数', plot_width=800, plot_height=400, 
            x_axis_label='date', y_axis_label='followers', x_axis_type='datetime', background_fill_color='DarkGreen')
 
 # X軸の設定
@@ -136,7 +136,7 @@ source = ColumnDataSource(data = dict(x=x, y=y, date=date))
 hover_tool = HoverTool(tooltips = [('ツイート日時', '@date'), ('いいね数', '@y')], mode='mouse')
 
 # グラフ全体の設定
-p = figure(tools=[hover_tool], title='ツイートごとの「いいね数」 (2017/4～最新更新)', plot_width=400, plot_height=200,
+p = figure(tools=[hover_tool], title='ツイートごとの「いいね数」 (2017/4～最新更新)', plot_width=800, plot_height=400,
            x_range = [x[0], x[-1]], x_axis_label='ツイート日時', y_axis_label='favorited', x_axis_type='datetime', background_fill_color='DarkGreen')
 
 # X軸の設定
@@ -156,7 +156,7 @@ p.legend.location = 'top_left'
 # rangetoolは、グラフの描画範囲をスライダーで変更することができます。
 # rangetool用のグラフの設定を追加
 select = figure(title="上段のグラフの表示範囲をスライダーで指定",
-                plot_height=100, plot_width=400, y_range=p.y_range,
+                plot_height=200, plot_width=800, y_range=p.y_range,
                 x_axis_type="datetime", y_axis_type=None,
                 tools="", toolbar_location=None, background_fill_color="#efefef")
 
@@ -194,11 +194,11 @@ hover_tool_2 = HoverTool(tooltips = [('時刻', '@x'), ('リツイート数', '@
 
 # グラフ全体の設定
 p1 = figure(tools=[hover_tool_1], title='いいね数 (時刻ごと平均)  2017年4月～最新更新',
-            plot_width=400, plot_height=200, x_axis_label='hour', y_axis_label='いいね数',
+            plot_width=800, plot_height=400, x_axis_label='hour', y_axis_label='いいね数',
             background_fill_color='DarkGreen')
 
 p2 = figure(tools=[hover_tool_2], title='リツイート数 (時刻ごと平均)  2017年4月～最新更新',
-            plot_width=400, plot_height=200, x_axis_label='hour', y_axis_label='リツイート数',
+            plot_width=800, plot_height=400, x_axis_label='hour', y_axis_label='リツイート数',
             background_fill_color='DarkGreen')
 
 # 棒グラフ
@@ -239,7 +239,7 @@ hover_tool_1 = HoverTool(tooltips = [('フォロワー数', '@x'), ('フォロ�
 
 # グラフ全体の設定
 fig4 = figure(tools=[hover_tool_1], title='フォロワーごとの「フォロワー数」「フォロー数」(2017/4～最新更新)',
-            plot_width=400, plot_height=200, x_axis_label='フォロワー数', y_axis_label='フォロー数',
+            plot_width=800, plot_height=400, x_axis_label='フォロワー数', y_axis_label='フォロー数',
             background_fill_color='Darkgreen')
 
 # 散布図
@@ -278,19 +278,19 @@ hover_tool_3 = HoverTool(tooltips = [('date', '@date2'), ('Tweets', '@y3')], mod
 hover_tool_4 = HoverTool(tooltips = [('date', '@date2'), ('Profile Access', '@y4')], mode='mouse')
 
 # グラフ全体の設定
-p1 = figure(tools=[hover_tool_1], title='月ごとフォロワー数(2017/4-2021/9)', plot_width=400, plot_height=200, 
+p1 = figure(tools=[hover_tool_1], title='月ごとフォロワー数(2017/4-2021/9)', plot_width=800, plot_height=400, 
            x_axis_label='date', y_axis_label='followers', x_axis_type='datetime',
            background_fill_color='Navy')
 
-p2 = figure(tools=[hover_tool_2], title='月間インプレッション数(2017/4-2021/9 Monthly)', plot_width=400, plot_height=200, 
+p2 = figure(tools=[hover_tool_2], title='月間インプレッション数(2017/4-2021/9 Monthly)', plot_width=800, plot_height=400, 
            x_axis_label='date', y_axis_label='Impression', x_axis_type='datetime',
            background_fill_color='Navy')
 
-p3 = figure(tools=[hover_tool_3], title='月間ツイート数(2017/4-2021/9 Monthly)', plot_width=400, plot_height=200, 
+p3 = figure(tools=[hover_tool_3], title='月間ツイート数(2017/4-2021/9 Monthly)', plot_width=800, plot_height=400, 
            x_axis_label='date', y_axis_label='Tweets', x_axis_type='datetime',
            background_fill_color='Navy')
 
-p4 = figure(tools=[hover_tool_4], title='月間プロフィールアクセス数(2017/4-2021/9 Monthly)', plot_width=400, plot_height=200, 
+p4 = figure(tools=[hover_tool_4], title='月間プロフィールアクセス数(2017/4-2021/9 Monthly)', plot_width=800, plot_height=400, 
            x_axis_label='date', y_axis_label='Profile Access', x_axis_type='datetime',
            background_fill_color='Navy')
 
@@ -356,7 +356,7 @@ hover_tool_2 = HoverTool(tooltips = [('date', '@date'), ('Engagement', '@y2')], 
 
 # グラフ全体の設定
 p1 = figure(tools=[hover_tool_1, hover_tool_2], title='インプレッション数とエンゲージメント数 (1ツイートあたり)  2020年10月～2021年9月',
-            plot_width=400, plot_height=200, x_axis_label='date', y_axis_label='Impression', x_axis_type='datetime',
+            plot_width=800, plot_height=400, x_axis_label='date', y_axis_label='Impression', x_axis_type='datetime',
            x_range = [x[0], x[-1]], y_range= [0, 100000], background_fill_color='Navy')
 
 # X軸の設定
@@ -379,7 +379,7 @@ p1.legend.location = 'top_left'
 # rangetoolは、グラフの描画範囲をスライダーで変更することができます。
 # rangetool用のグラフの設定を追加
 select1 = figure(title="上段のグラフの表示範囲をスライダーで指定",
-                plot_height=100, plot_width=400, y_range= [0, 500000],
+                plot_height=200, plot_width=800, y_range= [0, 500000],
                 x_axis_type="datetime", y_axis_type=None,
                 tools="", toolbar_location=None, background_fill_color="#efefef")
 
@@ -442,19 +442,19 @@ hover_tool_4 = HoverTool(tooltips = [('hour', '@x4'), ('Tweet', '@y4')], mode='m
 
 # グラフ全体の設定
 p1 = figure(tools=[hover_tool_1], title='インプレッション数 (時刻ごと平均)  2020年10月～2021年9月 ※外れ値を処理',
-            plot_width=400, plot_height=200, x_axis_label='hour', y_axis_label='Impression',
+            plot_width=800, plot_height=400, x_axis_label='hour', y_axis_label='Impression',
             background_fill_color='Navy')
 
 p2 = figure(tools=[hover_tool_2], title='エンゲージメント数 (時刻ごと平均)  2020年10月～2021年9月 ※外れ値を処理',
-            plot_width=400, plot_height=200, x_axis_label='hour', y_axis_label='Engagement',
+            plot_width=800, plot_height=400, x_axis_label='hour', y_axis_label='Engagement',
             background_fill_color='Navy')
 
 p3 = figure(tools=[hover_tool_3], title='プロフィールアクセス数 (時刻ごと平均)  2020年10月～2021年9月 ※外れ値を処理',
-            plot_width=400, plot_height=200, x_axis_label='hour', y_axis_label='Profile Access',
+            plot_width=800, plot_height=400, x_axis_label='hour', y_axis_label='Profile Access',
             background_fill_color='Navy')
 
 p4 = figure(tools=[hover_tool_4], title='ツイート数 (時刻ごと平均)  2020年10月～2021年9月 ※外れ値を処理',
-            plot_width=400, plot_height=200, x_axis_label='hour', y_axis_label='Tweet',
+            plot_width=800, plot_height=400, x_axis_label='hour', y_axis_label='Tweet',
             background_fill_color='Navy')
 
 
