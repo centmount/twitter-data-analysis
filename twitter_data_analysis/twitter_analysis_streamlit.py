@@ -21,6 +21,14 @@ import bokeh.palettes as bp
 from datetime import datetime, timedelta
 import os
 
+# ページレイアウトをワイドに設定
+st.set_page_config(layout='wide')
+
+# パスワードでログイン
+st.text_input('パスワードを入力してください:', value='', type='password')
+if value != st.secrets['password']:
+    st.error('正しいパスワードを入力してください')
+
 # 現在時刻
 now_time = datetime.now() + timedelta(hours=9)
 
@@ -90,7 +98,7 @@ source = ColumnDataSource(data = dict(x = x, y = y, date=date))
 hover_tool = HoverTool(tooltips = [('date and time', '@date'), ('followers', '@y')], mode='mouse')
 
 # グラフ全体の設定
-fig1 = figure(tools=[hover_tool], title='最新フォロワー数 (「サタデーステーション」公式Twitter)', plot_width=800, plot_height=400, 
+fig1 = figure(tools=[hover_tool], title='最新フォロワー数', plot_width=800, plot_height=400, 
            x_axis_label='date', y_axis_label='followers', x_axis_type='datetime', background_fill_color='DarkGreen')
 
 # X軸の設定
@@ -227,7 +235,7 @@ source = ColumnDataSource(data = dict(x = x, y = y))
 hover_tool_1 = HoverTool(tooltips = [('フォロワー数', '@x'), ('フォロー数', '@y')], mode='mouse')
 
 # グラフ全体の設定
-fig4 = figure(tools=[hover_tool_1], title='「サタステ」フォロワーの「フォロワー数」「フォロー数」(2017/4～最新更新)',
+fig4 = figure(tools=[hover_tool_1], title='フォロワーごとの「フォロワー数」「フォロー数」(2017/4～最新更新)',
             plot_width=800, plot_height=400, x_axis_label='フォロワー数', y_axis_label='フォロー数',
             background_fill_color='Darkgreen')
 
