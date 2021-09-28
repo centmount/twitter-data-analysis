@@ -22,6 +22,8 @@ from datetime import datetime, timedelta
 import os
 import time
 
+st.set_page_config(layout="wide")
+
 # パスワード入力
 def login():
     value = st.sidebar.text_input('パスワードを入力してください:', type='password')
@@ -127,6 +129,19 @@ st.markdown('''
 ***
 ''')
 
+
+# サイドバーにラジオボタンを作成
+genre = st.sidebar.radio(
+     "表示する図表を選択してください",
+     ('ツイートごと「いいね数」最新', 
+      '時刻ごと「いいね数」「リツイート数」最新', 
+      'フォロワーごと「フォロワー数」「フォロー数」最新'
+      '月間「インプレッション数」「フォロワー数」'
+      'ツイートごと「インプレッション数」「エンゲージメント数」'
+      '時刻ごと「インプレッション数」「ツイート数」'
+      ))
+
+
 # ツイート時間でグループ分け
 df_created_at = df.groupby('created_at').mean()
 
@@ -179,11 +194,12 @@ select.toolbar.active_multi = range_rool
 fig2 = column(p,select)
 show(fig2)
 
-st.bokeh_chart(fig2, use_container_width=False)
+if genre == 'ツイートごと「いいね数」最新':
+    st.bokeh_chart(fig2, use_container_width=False)
+    st.markdown('''
+    ***
+    ''')
 
-st.markdown('''
-***
-''')
 
 # 時刻でグループ分け
 df_created_at['hour'] = df_created_at.index.hour
@@ -222,16 +238,15 @@ p2.legend.location = 'top_left'
 fig3 = column(p1, p2)
 show(fig3)
 
-st.bokeh_chart(fig3, use_container_width=False)
-
-st.write('いいね数の平均', df_created_at['favorited'].mean()) 
-st.write('いいね数の中央値', df_created_at['favorited'].median())
-st.write('リツイート数の平均', df_created_at['retweeted'].mean()) 
-st.write('リツイート数の中央値', df_created_at['retweeted'].median())
-
-st.markdown('''
-***
-''')
+if genre == '時刻ごと「いいね数」「リツイート数」最新':
+    st.bokeh_chart(fig3, use_container_width=False)
+    st.write('いいね数の平均', df_created_at['favorited'].mean()) 
+    st.write('いいね数の中央値', df_created_at['favorited'].median())
+    st.write('リツイート数の平均', df_created_at['retweeted'].mean()) 
+    st.write('リツイート数の中央値', df_created_at['retweeted'].median())
+    st.markdown('''
+    ***
+    ''')
 
 
 st.write('フォロワーに関するデータ (2017/4～最新更新)')
@@ -264,14 +279,15 @@ fig4.legend.location = 'top_left'
 #output_file('tweet_data.html')
 show(fig4)
 
-st.bokeh_chart(fig4, use_container_width=True)
+if genre == 'フォロワーごと「フォロワー数」「フォロー数」最新':
+    st.bokeh_chart(fig4, use_container_width=True)
+    st.markdown('''
+    ***
+    ''')
 
-st.markdown('''
-***
-''')
 
 # Twitterアナリティクスの月ごとデータ(2017/04-2021/09)
-st.title('Twitterアナリティクスのデータ：月ごとに手動更新必要')
+st.title('Twitterアナリティクスのデータ：月間更新')
 
 st.write('Twitterアナリティクスの月ごとデータ(2017/04-2021/09)')
 
@@ -349,11 +365,11 @@ p4.legend.location = 'top_left'
 fig5 = column(p1, p2, p3, p4)
 show(fig5)
 
-st.bokeh_chart(fig5, use_container_width=False)
-
-st.markdown('''
-***
-''')
+if genre == '月間「インプレッション数」「フォロワー数」':
+    st.bokeh_chart(fig5, use_container_width=False)
+    st.markdown('''
+    ***
+    ''')
 
 
 # Twitterアナリティクスのツイートごとデータ(2020/10-2021/09)
@@ -376,7 +392,7 @@ hover_tool_1 = HoverTool(tooltips = [('date', '@date'), ('Impressiion', '@y')], 
 hover_tool_2 = HoverTool(tooltips = [('date', '@date'), ('Engagement', '@y2')], mode='mouse')
 
 # グラフ全体の設定
-p1 = figure(tools=[hover_tool_1, hover_tool_2], title='インプレッション数とエンゲージメント数 (1ツイートあたり)  2020年10月～2021年9月',
+p1 = figure(tools=[hover_tool_1, hover_tool_2], title='インプレッション数とエンゲージメント数 (ツイートごと)  2020年10月～2021年9月',
             plot_width=800, plot_height=400, x_axis_label='date', y_axis_label='Impression', x_axis_type='datetime',
            x_range = [x[0], x[-1]], y_range= [0, 100000], background_fill_color='Navy')
 
@@ -420,11 +436,11 @@ select1.toolbar.active_multi = range_tool
 fig6 = column(p1, select1)
 show(fig6)
 
-st.bokeh_chart(fig6, use_container_width=False)
-
-st.markdown('''
-***
-''')
+if genre == 'ツイートごと「インプレッション数」「エンゲージメント数」':
+    st.bokeh_chart(fig6, use_container_width=False)
+    st.markdown('''
+    ***
+    ''')
 
          
 # Twitterアナリティクスのツイートデータ(ツイート時刻ごと)(2020/10-2021/09)
@@ -504,8 +520,9 @@ p4.legend.location = 'top_left'
 fig7 = column(p1, p2, p3, p4)
 show(fig7)
 
-st.bokeh_chart(fig7, use_container_width=False)
+if genre == '時刻ごと「インプレッション数」「ツイート数」':
+    st.bokeh_chart(fig7, use_container_width=False)
+    st.markdown('''
+    ***
+    ''')
 
-st.markdown('''
-***
-''')
