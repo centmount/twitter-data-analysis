@@ -134,10 +134,10 @@ st.markdown('''
 genre = st.sidebar.radio(
      "表示する図表を選択してください",
      ('ツイートごと「いいね数」最新', 
-      '時刻ごと「いいね数」「リツイート数」最新',
-      'フォロワーごと「フォロワー数」「フォロー数」最新',
+      '時刻ごと「いいね数」最新',
+      'フォロワーごと「フォロワー数」最新',
       '月間「インプレッション数」「フォロワー数」',
-      'ツイートごと「インプレッション数」「エンゲージメント数」',
+      'ツイートごと「インプレッション数」',
       '時刻ごと「インプレッション数」「ツイート数」'
       ))
 
@@ -238,7 +238,7 @@ p2.legend.location = 'top_left'
 fig3 = column(p1, p2)
 show(fig3)
 
-if genre == '時刻ごと「いいね数」「リツイート数」最新':
+if genre == '時刻ごと「いいね数」最新':
     st.bokeh_chart(fig3, use_container_width=False)
     st.write('いいね数の平均', df_created_at['favorited'].mean()) 
     st.write('いいね数の中央値', df_created_at['favorited'].median())
@@ -279,7 +279,7 @@ fig4.legend.location = 'top_left'
 #output_file('tweet_data.html')
 show(fig4)
 
-if genre == 'フォロワーごと「フォロワー数」「フォロー数」最新':
+if genre == 'フォロワーごと「フォロワー数」最新':
     st.bokeh_chart(fig4, use_container_width=True)
     st.markdown('''
     ***
@@ -436,7 +436,7 @@ select1.toolbar.active_multi = range_tool
 fig6 = column(p1, select1)
 show(fig6)
 
-if genre == 'ツイートごと「インプレッション数」「エンゲージメント数」':
+if genre == 'ツイートごと「インプレッション数」':
     st.bokeh_chart(fig6, use_container_width=False)
     st.markdown('''
     ***
