@@ -450,7 +450,7 @@ p4 = figure(tools=[hover_tool_4], title='ツイート数 (時刻ごと平均)  2
 p1.vbar(x='x', width=0.5, top='y', legend_label='インプレッション数(平均)', source=source, color='Lime')
 p2.vbar(x='x', width=0.5, top='y2', legend_label='エンゲージメント数(平均)', source=source, color='Magenta')
 p3.vbar(x='x', width=0.5, top='y3', legend_label='プロフィールアクセス数(平均)', source=source, color='OrangeRed')
-p4.vbar(x='x4', width=0.5, top='y4', legend_label='ツイート数(平均)', source=source, color='AquaMarine')
+p4.vbar(x='x4', width=0.5, top='y4', legend_label='ツイート数', source=source, color='AquaMarine')
 
 # 凡例の位置
 p1.legend.location = 'top_left'
