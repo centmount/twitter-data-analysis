@@ -123,23 +123,26 @@ fig1.legend.location = 'top_left'
 # 描画
 # output_file('followers.html')
 show(fig1)
-st.bokeh_chart(fig1, use_container_width=False)
-
-st.markdown('''
-***
-''')
 
 
 # サイドバーにラジオボタンを作成
 genre = st.sidebar.radio(
      "表示する図表を選択してください",
-     ('ツイートごと「いいね数」最新', 
-      '時刻ごと「いいね数」最新',
-      'フォロワーごと「フォロワー数」最新',
-      '月間「インプレッション数」「フォロワー数」',
-      'ツイートごと「インプレッション数」',
-      '時刻ごと「インプレッション数」「ツイート数」'
+     ('フォロワー数 最新',
+      'ツイートごと いいね数 最新', 
+      '時刻ごと いいね数 最新',
+      'フォロワーごと フォロワー数 最新',
+      '月間インプレッション フォロワー',
+      'ツイートごとインプレッション数',
+      '時刻ごとインプレッション数'
       ))
+
+
+if genre == 'フォロワー数 最新':
+    st.bokeh_chart(fig1, use_container_width=False)
+    st.markdown('''
+    ***
+    ''')
 
 
 # ツイート時間でグループ分け
@@ -194,7 +197,7 @@ select.toolbar.active_multi = range_rool
 fig2 = column(p,select)
 show(fig2)
 
-if genre == 'ツイートごと「いいね数」最新':
+if genre == 'ツイートごと いいね数 最新':
     st.bokeh_chart(fig2, use_container_width=False)
     st.markdown('''
     ***
@@ -238,7 +241,7 @@ p2.legend.location = 'top_left'
 fig3 = column(p1, p2)
 show(fig3)
 
-if genre == '時刻ごと「いいね数」最新':
+if genre == '時刻ごと いいね数 最新':
     st.bokeh_chart(fig3, use_container_width=False)
     st.write('いいね数の平均', df_created_at['favorited'].mean()) 
     st.write('いいね数の中央値', df_created_at['favorited'].median())
@@ -279,7 +282,7 @@ fig4.legend.location = 'top_left'
 #output_file('tweet_data.html')
 show(fig4)
 
-if genre == 'フォロワーごと「フォロワー数」最新':
+if genre == 'フォロワーごと フォロワー数 最新':
     st.bokeh_chart(fig4, use_container_width=True)
     st.markdown('''
     ***
@@ -365,7 +368,7 @@ p4.legend.location = 'top_left'
 fig5 = column(p1, p2, p3, p4)
 show(fig5)
 
-if genre == '月間「インプレッション数」「フォロワー数」':
+if genre == '月間インプレッション フォロワー':
     st.bokeh_chart(fig5, use_container_width=False)
     st.markdown('''
     ***
@@ -436,7 +439,7 @@ select1.toolbar.active_multi = range_tool
 fig6 = column(p1, select1)
 show(fig6)
 
-if genre == 'ツイートごと「インプレッション数」':
+if genre == 'ツイートごとインプレッション数':
     st.bokeh_chart(fig6, use_container_width=False)
     st.markdown('''
     ***
@@ -520,7 +523,7 @@ p4.legend.location = 'top_left'
 fig7 = column(p1, p2, p3, p4)
 show(fig7)
 
-if genre == '時刻ごと「インプレッション数」「ツイート数」':
+if genre == '時刻ごとインプレッション数':
     st.bokeh_chart(fig7, use_container_width=False)
     st.markdown('''
     ***
