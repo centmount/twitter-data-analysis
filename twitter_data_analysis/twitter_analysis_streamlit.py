@@ -24,8 +24,8 @@ import time
 
 # パスワード入力
 def login():
+    count = 0
     while True:
-        count = 0
         value = st.text_input('パスワードを入力してください:', value='', type='password', key = count)
         count += 1
         if value == st.secrets['password']:
