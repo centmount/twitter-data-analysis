@@ -25,7 +25,7 @@ import os
 st.set_page_config(layout='wide')
 
 # パスワードでログイン
-st.text_input('パスワードを入力してください:', value='', type='password')
+value = st.text_input('パスワードを入力してください:', value='', type='password')
 if value != st.secrets['password']:
     st.error('正しいパスワードを入力してください')
 
