@@ -87,8 +87,7 @@ data_load_state.text('Loading data...Done!')
 st.write('ツイートごとのデータ (2017/4～最新更新)')
 
 df_index = df.sort_index(ascending=False)
-df_tweet_id = df_index.sort_values('created_at', ascending=False)
-st.dataframe(df_tweet_id, width=1200, height=400)
+st.dataframe(df_index, width=1200, height=400)
 
 # 保存時間でグループ分け
 df_save_time = df.groupby('save_time').mean()
