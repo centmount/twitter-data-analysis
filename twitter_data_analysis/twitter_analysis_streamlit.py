@@ -120,10 +120,6 @@ fig1.circle('x', 'y', size=15, fill_alpha=0.5, source=source, color='Aqua')
 # 凡例の位置
 fig1.legend.location = 'top_left'
 
-# 描画
-# output_file('followers.html')
-show(fig1)
-
 
 # サイドバーにラジオボタンを作成
 genre = st.sidebar.radio(
@@ -137,8 +133,10 @@ genre = st.sidebar.radio(
       '時刻ごとインプレッション数'
       ))
 
-
+# 描画
 if genre == 'フォロワー数 最新':
+    output_file('followers_new.html')
+    show(fig1)
     st.bokeh_chart(fig1, use_container_width=False)
     st.markdown('''
     ***
@@ -193,11 +191,10 @@ select.add_tools(range_rool) # range_roolを追加
 select.toolbar.active_multi = range_rool
 
 # 描画
-# output_file('favorited.html')
-fig2 = column(p,select)
-show(fig2)
-
 if genre == 'ツイートごと いいね数 最新':
+    output_file('favorited_new.html')
+    fig2 = column(p,select)
+    show(fig2)
     st.bokeh_chart(fig2, use_container_width=False)
     st.markdown('''
     ***
@@ -237,11 +234,10 @@ p1.legend.location = 'top_left'
 p2.legend.location = 'top_left'
 
 # 描画
-# output_file('hours_data.html')
-fig3 = column(p1, p2)
-show(fig3)
-
 if genre == '時刻ごと いいね数 最新':
+    output_file('hours_new.html')
+    fig3 = column(p1, p2)
+    show(fig3)
     st.bokeh_chart(fig3, use_container_width=False)
     st.write('いいね数の平均', df_created_at['favorited'].mean()) 
     st.write('いいね数の中央値', df_created_at['favorited'].median())
@@ -279,10 +275,9 @@ fig4.circle('x', 'y', size=15, fill_alpha=0.7, source=source, color='Aqua', lege
 fig4.legend.location = 'top_left'
 
 # 描画
-#output_file('tweet_data.html')
-show(fig4)
-
 if genre == 'フォロワーごと フォロワー数 最新':
+    output_file('followers_data_new.html')
+    show(fig4)
     st.bokeh_chart(fig4, use_container_width=True)
     st.markdown('''
     ***
@@ -363,12 +358,10 @@ p3.legend.location = 'top_left'
 p4.legend.location = 'top_left'
 
 
-# 描画
-#output_file('tweet_month_data.html')
-fig5 = column(p1, p2, p3, p4)
-show(fig5)
-
 if genre == '月間インプレッション フォロワー':
+    output_file('tweet_monthly.html')
+    fig5 = column(p1, p2, p3, p4)
+    show(fig5)
     st.bokeh_chart(fig5, use_container_width=False)
     st.markdown('''
     ***
@@ -435,11 +428,10 @@ select1.toolbar.active_multi = range_tool
 
 
 # 描画
-#output_file('tweet_data.html')
-fig6 = column(p1, select1)
-show(fig6)
-
 if genre == 'ツイートごとインプレッション数':
+    output_file('impression.html')
+    fig6 = column(p1, select1)
+    show(fig6)
     st.bokeh_chart(fig6, use_container_width=False)
     st.markdown('''
     ***
@@ -519,11 +511,10 @@ p3.legend.location = 'top_left'
 p4.legend.location = 'top_left'
 
 # 描画
-#output_file('tweet_data.html')
-fig7 = column(p1, p2, p3, p4)
-show(fig7)
-
 if genre == '時刻ごとインプレッション数':
+    output_file('tweet_hour_data.html')
+    fig7 = column(p1, p2, p3, p4)
+    show(fig7)
     st.bokeh_chart(fig7, use_container_width=False)
     st.markdown('''
     ***
