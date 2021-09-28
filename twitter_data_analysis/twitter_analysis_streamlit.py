@@ -119,9 +119,9 @@ fig1.legend.location = 'top_left'
 
 # 描画
 # output_file('followers.html')
-show(fig1, use_container_width=True)
+show(fig1)
+st.bokeh_chart(fig1, use_container_width=True)
 
-st.bokeh_chart(fig1)
 
 # ツイート時間でグループ分け
 df_created_at = df.groupby('created_at').mean()
@@ -173,9 +173,9 @@ select.toolbar.active_multi = range_rool
 # 描画
 # output_file('favorited.html')
 fig2 = column(p,select)
-show(fig2, use_container_width=True)
+show(fig2)
 
-st.bokeh_chart(fig2)
+st.bokeh_chart(fig2, use_container_width=True)
 
 # 時刻でグループ分け
 df_created_at['hour'] = df_created_at.index.hour
@@ -214,7 +214,7 @@ p2.legend.location = 'top_left'
 fig3 = gridplot([[p1], [p2]])
 show(fig3)
 
-st.bokeh_chart(fig3, use_container_width=False)
+st.bokeh_chart(fig3, use_container_width=True)
 
 st.write('いいね数の平均', df_created_at['favorited'].mean()) 
 st.write('いいね数の中央値', df_created_at['favorited'].median())
@@ -252,7 +252,7 @@ fig4.legend.location = 'top_left'
 #output_file('tweet_data.html')
 show(fig4)
 
-st.bokeh_chart(fig4)
+st.bokeh_chart(fig4, use_container_width=True)
 
 
 # Twitterアナリティクスの月ごとデータ(2017/04-2021/09)
@@ -332,7 +332,7 @@ p4.legend.location = 'top_left'
 fig5 = gridplot([[p1, p2], [p3, p4]])
 show(fig5)
 
-st.bokeh_chart(fig5)
+st.bokeh_chart(fig5, use_container_width=True)
 
 
 # Twitterアナリティクスのtツイートごとデータ(2020/10-2021/09)
@@ -399,7 +399,8 @@ select1.toolbar.active_multi = range_tool
 fig6 = gridplot([[p1], [select1]])
 show(fig6)
 
-st.bokeh_chart(fig6)
+st.bokeh_chart(fig6, use_container_width=True)
+
 
 # Twitterアナリティクスのツイートデータ(ツイート時刻ごと)(2020/10-2021/09)
 st.write('Twitterアナリティクスのツイートデータ(ツイート時刻ごと)(2020/10-2021/09)')
@@ -474,5 +475,5 @@ p4.legend.location = 'top_left'
 fig7 = gridplot([[p1, p2], [p3, p4]])
 show(fig7)
 
-st.bokeh_chart(fig7)
+st.bokeh_chart(fig7, use_container_width=True)
 
