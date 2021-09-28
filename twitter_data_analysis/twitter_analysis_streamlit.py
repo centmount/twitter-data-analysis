@@ -25,7 +25,7 @@ import os
 def login():
     value = st.text_input('パスワードを入力してください:', type='password')
     while value != st.secrets['password'] :
-        value = st.text_input('パスワードを入力してください:', type='password')
+        print('正しいパスワードを入力してください
     st.text('正しいパスワードが入力されました')
 
 login()
