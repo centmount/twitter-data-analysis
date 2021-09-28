@@ -86,7 +86,8 @@ data_load_state.text('Loading data...Done!')
 
 st.write('ツイートごとのデータ (2017/4～最新更新)')
 
-st.dataframe(df.sort_index(ascending=False), width=1000, height=400)
+df_tweet_id = df.sort_values('created_at', ascending=False)
+st.dataframe(df_tweet_id, width=1200, height=400)
 
 # 保存時間でグループ分け
 df_save_time = df.groupby('save_time').mean()
@@ -235,7 +236,7 @@ st.markdown('''
 
 st.write('フォロワーに関するデータ (2017/4～最新更新)')
 
-st.dataframe(df_followers.sort_index(ascending=False), width=1000, height=400)
+st.dataframe(df_followers.sort_index(ascending=False), width=1200, height=400)
 
 df_followers_mean = df_followers.groupby('user_id').mean()
 
@@ -274,7 +275,7 @@ st.title('Twitterアナリティクスのデータ：月ごとに手動更新必
 
 st.write('Twitterアナリティクスの月ごとデータ(2017/04-2021/09)')
 
-st.dataframe(df_month, width=1000, height=400)
+st.dataframe(df_month, width=1200, height=400)
 
 # 過去のグラフ作成用の辞書
 x = df_month.index
@@ -360,7 +361,7 @@ st.write('Twitterアナリティクスのツイートごとデータ(2020/10-202
 
 time_index_df = tweets_df.sort_values(by='時間').set_index('時間')
 time_index_df = time_index_df.drop('Unnamed: 0', axis=1)
-st.dataframe(time_index_df, width=1000, height=400)
+st.dataframe(time_index_df, width=1200, height=400)
 
 # グラフ作成用の辞書
 x = time_index_df.index
@@ -430,7 +431,7 @@ st.markdown('''
 st.write('Twitterアナリティクスのツイートデータ(ツイート時刻ごと)(2020/10-2021/09)')
 time_df = tweets_df[["時刻", "ツイート本文", "インプレッション", "エンゲージメント", "ユーザープロフィールクリック"]]
 
-st.dataframe(time_df, width=1000, height=400)
+st.dataframe(time_df, width=1200, height=400)
 
 st.markdown('''
 ***
@@ -450,7 +451,7 @@ df_count = new_time_df.groupby(["時刻"]).count()
 df_mean = new_time_df.groupby(["時刻"]).mean()
 
 st.write('Twitterアナリティクスのツイートデータ(時刻ごと平均)(2020/10-2021/09)')
-st.dataframe(df_mean, width=1000, height=400)
+st.dataframe(df_mean, width=1200, height=400)
 
 # グラフ作成用の辞書
 x = df_mean.index
