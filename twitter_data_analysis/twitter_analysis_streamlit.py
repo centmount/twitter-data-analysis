@@ -86,7 +86,7 @@ data_load_state.text('Loading data...Done!')
 
 st.write('ツイートごとのデータ (2017/4～最新更新)')
 
-st.dataframe(df.sort_index(ascending=False), width=1000, height=200)
+st.dataframe(df.sort_index(ascending=False), width=1000, height=400)
 
 # 保存時間でグループ分け
 df_save_time = df.groupby('save_time').mean()
@@ -235,7 +235,7 @@ st.markdown('''
 
 st.write('フォロワーに関するデータ (2017/4～最新更新)')
 
-st.dataframe(df_followers.sort_index(ascending=False), width=1000, height=200)
+st.dataframe(df_followers.sort_index(ascending=False), width=1000, height=400)
 
 df_followers_mean = df_followers.groupby('user_id').mean()
 
@@ -274,7 +274,7 @@ st.title('Twitterアナリティクスのデータ：月ごとに手動更新必
 
 st.write('Twitterアナリティクスの月ごとデータ(2017/04-2021/09)')
 
-st.dataframe(df_month, width=1000, height=200)
+st.dataframe(df_month, width=1000, height=400)
 
 # 過去のグラフ作成用の辞書
 x = df_month.index
@@ -360,7 +360,7 @@ st.write('Twitterアナリティクスのツイートごとデータ(2020/10-202
 
 time_index_df = tweets_df.sort_values(by='時間').set_index('時間')
 time_index_df = time_index_df.drop('Unnamed: 0', axis=1)
-st.dataframe(time_index_df, width=1000, height=200)
+st.dataframe(time_index_df, width=1000, height=400)
 
 # グラフ作成用の辞書
 x = time_index_df.index
@@ -430,7 +430,11 @@ st.markdown('''
 st.write('Twitterアナリティクスのツイートデータ(ツイート時刻ごと)(2020/10-2021/09)')
 time_df = tweets_df[["時刻", "ツイート本文", "インプレッション", "エンゲージメント", "ユーザープロフィールクリック"]]
 
-st.dataframe(time_df, width=1000, height=200)
+st.dataframe(time_df, width=1000, height=400)
+
+st.markdown('''
+***
+''')
 
 # 1パーセンタイル、99パーセンタイルを指定
 q_min = time_df['インプレッション'].quantile(0.01) 
@@ -446,7 +450,7 @@ df_count = new_time_df.groupby(["時刻"]).count()
 df_mean = new_time_df.groupby(["時刻"]).mean()
 
 st.write('Twitterアナリティクスのツイートデータ(時刻ごと平均)(2020/10-2021/09)')
-st.dataframe(df_mean, width=1000, height=200)
+st.dataframe(df_mean, width=1000, height=400)
 
 # グラフ作成用の辞書
 x = df_mean.index
@@ -477,7 +481,7 @@ p3 = figure(tools=[hover_tool_3], title='プロフィールアクセス数 (時�
             plot_width=800, plot_height=400, x_axis_label='hour', y_axis_label='Profile Access',
             background_fill_color='Navy')
 
-p4 = figure(tools=[hover_tool_4], title='ツイート数 (時刻ごと平均)  2020年10月～2021年9月 ※外れ値を処理',
+p4 = figure(tools=[hover_tool_4], title='ツイート数 (時刻ごと件数)  2020年10月～2021年9月 ※外れ値を処理',
             plot_width=800, plot_height=400, x_axis_label='hour', y_axis_label='Tweet',
             background_fill_color='Navy')
 
