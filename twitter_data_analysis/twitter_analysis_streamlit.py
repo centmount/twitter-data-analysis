@@ -52,6 +52,12 @@ FILE_PATH_4 = st.secrets['file_path_4']
 
 st.title('Twitterデータ分析')
 
+# クリアをチェックするとキャッシュをクリア
+st.write('最新データに更新したい場合は「Clear cache」をチェック。更新後はチェックを外してください。')
+if st.checkbox('Clear cache'):
+    caching.clear_cache()
+
+
 # csvファイルをpandasで読み取り
 @st.cache
 def load_data():
