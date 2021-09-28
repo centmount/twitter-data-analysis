@@ -270,7 +270,7 @@ st.markdown('''
 ''')
 
 # Twitterアナリティクスの月ごとデータ(2017/04-2021/09)
-st.title('アナリティクスのデータ：月ごとに手動更新必要）
+st.title('Twitterアナリティクスのデータ：月ごとに手動更新必要'）
 st.write('Twitterアナリティクスの月ごとデータ(2017/04-2021/09)')
 
 st.dataframe(df_month, width=1000, height=200)
