@@ -24,11 +24,10 @@ import time
 
 # パスワード入力
 def login():
-    value = st.text_input('パスワードを入力してください:', type='password')
+    value = st.sidebar.text_input('パスワードを入力してください:', type='password')
     if value == st.secrets['password']:
-        st.write('パスワードを確認しました！')
+        st.sidebar.write('パスワードを確認しました！')
     else:
-        st.error('正しいパスワードを入力して下さい')
         st.stop()
 
 login()
