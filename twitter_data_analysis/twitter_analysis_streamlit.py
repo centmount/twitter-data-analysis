@@ -24,13 +24,12 @@ import time
 
 # パスワード入力
 def login():
-    count = 0
-    while True:
-        value = st.text_input('パスワードを入力してください:', type='password', key = count)
-        count += 1
-        if value == st.secrets['password']:
-            st.write('パスワードを確認しました！')
-            break
+    value = st.text_input('パスワードを入力してください:', type='password')
+    if value == st.secrets['password']:
+        st.write('パスワードを確認しました！')
+    else:
+        st.error('正しいパスワードを入力して下さい')
+        st.stop()
 
 login()
 
