@@ -86,7 +86,7 @@ data_load_state.text('Loading data...Done!')
 
 st.write('ツイートごとのデータ (2017/4～最新更新)')
 
-st.dataframe(df.sort_index(ascending=False), width=800, height=200)
+st.dataframe(df.sort_index(ascending=False), width=1000, height=200)
 
 # 保存時間でグループ分け
 df_save_time = df.groupby('save_time').mean()
@@ -122,6 +122,9 @@ fig1.legend.location = 'top_left'
 show(fig1)
 st.bokeh_chart(fig1, use_container_width=False)
 
+st.markdown('''
+***
+''')
 
 # ツイート時間でグループ分け
 df_created_at = df.groupby('created_at').mean()
@@ -156,7 +159,7 @@ p.legend.location = 'top_left'
 # rangetoolは、グラフの描画範囲をスライダーで変更することができます。
 # rangetool用のグラフの設定を追加
 select = figure(title="上段のグラフの表示範囲をスライダーで指定",
-                plot_height=200, plot_width=800, y_range=p.y_range,
+                plot_height=100, plot_width=800, y_range=p.y_range,
                 x_axis_type="datetime", y_axis_type=None,
                 tools="", toolbar_location=None, background_fill_color="#efefef")
 
@@ -176,6 +179,10 @@ fig2 = column(p,select)
 show(fig2)
 
 st.bokeh_chart(fig2, use_container_width=False)
+
+st.markdown('''
+***
+''')
 
 # 時刻でグループ分け
 df_created_at['hour'] = df_created_at.index.hour
@@ -221,10 +228,14 @@ st.write('いいね数の中央値', df_created_at['favorited'].median())
 st.write('リツイート数の平均', df_created_at['retweeted'].mean()) 
 st.write('リツイート数の中央値', df_created_at['retweeted'].median())
 
+st.markdown('''
+***
+''')
+
 
 st.write('フォロワーに関するデータ (2017/4～最新更新)')
 
-st.dataframe(df_followers.sort_index(ascending=False), width=800, height=200)
+st.dataframe(df_followers.sort_index(ascending=False), width=1000, height=200)
 
 df_followers_mean = df_followers.groupby('user_id').mean()
 
@@ -254,11 +265,15 @@ show(fig4)
 
 st.bokeh_chart(fig4, use_container_width=True)
 
+st.markdown('''
+***
+''')
 
 # Twitterアナリティクスの月ごとデータ(2017/04-2021/09)
+st.title('アナリティクスのデータ：月ごとに手動更新必要）
 st.write('Twitterアナリティクスの月ごとデータ(2017/04-2021/09)')
 
-st.dataframe(df_month, width=800, height=200)
+st.dataframe(df_month, width=1000, height=200)
 
 # 過去のグラフ作成用の辞書
 x = df_month.index
@@ -334,13 +349,17 @@ show(fig5)
 
 st.bokeh_chart(fig5, use_container_width=False)
 
+st.markdown('''
+***
+''')
 
-# Twitterアナリティクスのtツイートごとデータ(2020/10-2021/09)
+
+# Twitterアナリティクスのツイートごとデータ(2020/10-2021/09)
 st.write('Twitterアナリティクスのツイートごとデータ(2020/10-2021/09)')
 
 time_index_df = tweets_df.sort_values(by='時間').set_index('時間')
 time_index_df = time_index_df.drop('Unnamed: 0', axis=1)
-st.dataframe(time_index_df, width=800, height=200)
+st.dataframe(time_index_df, width=1000, height=200)
 
 # グラフ作成用の辞書
 x = time_index_df.index
@@ -379,7 +398,7 @@ p1.legend.location = 'top_left'
 # rangetoolは、グラフの描画範囲をスライダーで変更することができます。
 # rangetool用のグラフの設定を追加
 select1 = figure(title="上段のグラフの表示範囲をスライダーで指定",
-                plot_height=200, plot_width=800, y_range= [0, 500000],
+                plot_height=100, plot_width=800, y_range= [0, 500000],
                 x_axis_type="datetime", y_axis_type=None,
                 tools="", toolbar_location=None, background_fill_color="#efefef")
 
@@ -401,12 +420,16 @@ show(fig6)
 
 st.bokeh_chart(fig6, use_container_width=False)
 
+st.markdown('''
+***
+''')
 
+         
 # Twitterアナリティクスのツイートデータ(ツイート時刻ごと)(2020/10-2021/09)
 st.write('Twitterアナリティクスのツイートデータ(ツイート時刻ごと)(2020/10-2021/09)')
 time_df = tweets_df[["時刻", "ツイート本文", "インプレッション", "エンゲージメント", "ユーザープロフィールクリック"]]
 
-st.dataframe(time_df, width=800, height=200)
+st.dataframe(time_df, width=1000, height=200)
 
 # 1パーセンタイル、99パーセンタイルを指定
 q_min = time_df['インプレッション'].quantile(0.01) 
@@ -422,7 +445,7 @@ df_count = new_time_df.groupby(["時刻"]).count()
 df_mean = new_time_df.groupby(["時刻"]).mean()
 
 st.write('Twitterアナリティクスのツイートデータ(時刻ごと平均)(2020/10-2021/09)')
-st.dataframe(df_mean, width=800, height=200)
+st.dataframe(df_mean, width=1000, height=200)
 
 # グラフ作成用の辞書
 x = df_mean.index
@@ -477,3 +500,6 @@ show(fig7)
 
 st.bokeh_chart(fig7, use_container_width=False)
 
+st.markdown('''
+***
+''')
