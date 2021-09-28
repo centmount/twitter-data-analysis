@@ -25,8 +25,9 @@ import os
 def login():
     global value
     value = st.text_input('パスワードを入力してください:', value='', type='password')
-    while value != st.secrets['password']:
+    if value != st.secrets['password']:
         st.error('正しいパスワードを入力してください')
+        return
 login()
 
 # 現在時刻
