@@ -305,7 +305,7 @@ p4.vbar(x=x, width=0.5, bottom=0, top=y4, color='Magenta', legend_label='プロ�
 # 散布図
 p1.circle('x', 'y', size=10, fill_alpha=0.5, source=source, color='Aqua')
 p2.cross('x', 'y2', size=10, fill_alpha=0.5, source=source, color='Lime')
-p3.star('x', 'y3', size=10, fill_alpha=0.5, source=source, color='Yellow')
+p3.asterisk('x', 'y3', size=10, fill_alpha=0.5, source=source, color='Yellow')
 p4.square('x', 'y4', size=10, fill_alpha=0.5, source=source, color='Magenta')
 
 
@@ -358,7 +358,7 @@ p1.vbar(x='x', top='y2', legend_label='エンゲージメント数', source=sour
 
 # 散布図
 p1.asterisk('x', 'y', size=10, fill_alpha=0.5, source=source, color='Lime')
-p1.star('x', 'y2', size=10, fill_alpha=0.5, source=source, color='Magenta')
+p1.asterisk('x', 'y2', size=10, fill_alpha=0.5, source=source, color='Magenta')
 
 
 # 凡例の位置
