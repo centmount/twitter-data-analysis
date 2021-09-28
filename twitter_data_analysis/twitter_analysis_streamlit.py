@@ -21,15 +21,6 @@ import bokeh.palettes as bp
 from datetime import datetime, timedelta
 import os
 
-# パスワードでログイン
-def login():
-    value = st.text_input('パスワードを入力してください:', type='password')
-    while value != st.secrets['password'] :
-        print('正しいパスワードを入力してください')
-    st.text('正しいパスワードが入力されました')
-
-login()
-
 # 現在時刻
 now_time = datetime.now() + timedelta(hours=9)
 
