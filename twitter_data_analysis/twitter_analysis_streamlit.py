@@ -86,7 +86,8 @@ data_load_state.text('Loading data...Done!')
 
 st.write('ツイートごとのデータ (2017/4～最新更新)')
 
-df_tweet_id = df.sort_values('created_at', ascending=False)
+df_index = df.sort_index(ascending=False)
+df_tweet_id = df_index.sort_values('created_at', ascending=False)
 st.dataframe(df_tweet_id, width=1200, height=400)
 
 # 保存時間でグループ分け
