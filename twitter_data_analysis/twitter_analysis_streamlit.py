@@ -51,6 +51,7 @@ FILE_PATH_4 = st.secrets['file_path_4']
 
 
 st.title('Twitterデータ分析')
+st.write('最新データに更新されていない場合、右上メニュー[Clear cache]を押してから[Rerun]を押して下さい')
 
 # csvファイルをpandasで読み取り
 @st.cache
@@ -142,6 +143,13 @@ if genre == 'フォロワー数 最新':
     st.markdown('''
     ***
     ''')
+    with open("followers_new.html", "rb") as fig1:
+        btn = st.download_button(
+        label="Download Fig1",
+        data=fig1,
+        file_name="followers_new.html",
+        mime="html")
+        
 
 
 # ツイート時間でグループ分け
