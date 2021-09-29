@@ -139,7 +139,7 @@ if genre == 'フォロワー数 最新':
     output_file('followers_new.html')
     show(fig1)
     st.bokeh_chart(fig1, use_container_width=False)
-    st.download_button(label="Download Fig1", data=show(fig1), file_name="followers_new.html", mime="text/plain")
+    st.download_button(label="Download Fig1", data=fig1, file_name="followers_new.html", mime="text/plain")
     st.markdown('''
     ***
     ''')
