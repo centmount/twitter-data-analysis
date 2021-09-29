@@ -120,7 +120,8 @@ hover_tool = HoverTool(tooltips = [('date and time', '@date'), ('followers', '@y
 output_file('followers_new.html')
 
 # グラフ全体の設定
-fig1 = figure(tools=[hover_tool], title='最新フォロワー数', plot_width=800, plot_height=400, 
+fig1 = figure(tools=[hover_tool], tools = "pan, wheel_zoom, box_zoom, reset, save",
+           title='最新フォロワー数', plot_width=800, plot_height=400, 
            x_axis_label='date', y_axis_label='followers', x_axis_type='datetime', background_fill_color='DarkGreen')
 
 # X軸の設定
@@ -153,7 +154,7 @@ genre = st.sidebar.radio(
 if genre == 'フォロワー数 最新':
     save(fig1)
     st.bokeh_chart(fig1, use_container_width=False)
-    with open("followers_new.html", "r") as fp:
+    with open("followers_new.html", "rb") as fp:
         btn = st.download_button(label="Download Fig", data=fp, file_name="followers_new.html", mime="text/html")
     st.markdown('''
     ***
