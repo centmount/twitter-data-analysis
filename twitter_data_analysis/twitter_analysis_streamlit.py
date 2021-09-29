@@ -13,7 +13,7 @@ from matplotlib import pyplot as plt
 import matplotlib.dates as mdates
 
 import pandas as pd
-from bokeh.io import show
+from bokeh.io import show, save
 from bokeh.plotting import figure, ColumnDataSource, output_file, show, reset_output
 from bokeh.layouts import column, gridplot
 from bokeh.models import DataSource, RangeTool, HoverTool, DatetimeTickFormatter, Range1d
@@ -137,9 +137,9 @@ genre = st.sidebar.radio(
 # 描画
 if genre == 'フォロワー数 最新':
     output_file('followers_new.html')
-    show(fig1)
+    save(fig1)
     st.bokeh_chart(fig1, use_container_width=False)
-    with open("0.89/followers_new.html", "rb") as fp:
+    with open("followers_new.html", "rb") as fp:
         btn = st.download_button(label="Download", data=fp, file_name="followers_new.html", mime="text/html")
     st.markdown('''
     ***
