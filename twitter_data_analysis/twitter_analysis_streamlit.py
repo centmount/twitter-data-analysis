@@ -92,6 +92,19 @@ st.write('ツイートごとのデータ (2017/4～最新更新)')
 df_index = df.sort_index(ascending=False)
 st.dataframe(df_index, width=1200, height=400)
 
+# 表をCSVでダウンロード
+@st.cache
+def convert_df(df):
+    return df.to_csv().encode('utf-8')
+
+csv1 = convert_df(df_index)
+st.download_button("Download CSV", csv1, "tweet_data_new.csv", "text/csv")
+
+st.markdown('''
+***
+''')
+
+
 # 保存時間でグループ分け
 df_save_time = df.groupby('save_time').mean()
 
@@ -140,7 +153,7 @@ if genre == 'フォロワー数 最新':
     save(fig1)
     st.bokeh_chart(fig1, use_container_width=False)
     with open("followers_new.html", "rb") as fp:
-        btn = st.download_button(label="Download", data=fp, file_name="followers_new.html", mime="text/html")
+        btn = st.download_button(label="Download Fig", data=fp, file_name="followers_new.html", mime="text/html")
     st.markdown('''
     ***
     ''')
@@ -197,8 +210,10 @@ select.toolbar.active_multi = range_rool
 if genre == 'ツイートごと いいね数 最新':
     output_file('favorited_new.html')
     fig2 = column(p,select)
-    show(fig2)
+    save(fig2)
     st.bokeh_chart(fig2, use_container_width=False)
+    with open("favorited_new.html", "rb") as fp:
+        btn = st.download_button(label="Download Fig", data=fp, file_name="favorited_new.html", mime="text/html")
     st.markdown('''
     ***
     ''')
@@ -240,8 +255,10 @@ p2.legend.location = 'top_left'
 if genre == '時刻ごと いいね数 最新':
     output_file('hours_new.html')
     fig3 = column(p1, p2)
-    show(fig3)
+    save(fig3)
     st.bokeh_chart(fig3, use_container_width=False)
+    with open("hours_new.html", "rb") as fp:
+        btn = st.download_button(label="Download Fig", data=fp, file_name="hours_new.html", mime="text/html")
     st.write('いいね数の平均', df_created_at['favorited'].mean()) 
     st.write('いいね数の中央値', df_created_at['favorited'].median())
     st.write('リツイート数の平均', df_created_at['retweeted'].mean()) 
@@ -254,6 +271,14 @@ if genre == '時刻ごと いいね数 最新':
 st.write('フォロワーに関するデータ (2017/4～最新更新)')
 
 st.dataframe(df_followers.sort_index(ascending=False), width=1200, height=400)
+
+csv2 = convert_df(df_followers.sort_index(ascending=False))
+st.download_button("Download CSV", csv2, "followers_data_new.csv", "text/csv")
+
+st.markdown('''
+***
+''')
+
 
 df_followers_mean = df_followers.groupby('user_id').mean()
 
@@ -280,8 +305,10 @@ fig4.legend.location = 'top_left'
 # 描画
 if genre == 'フォロワーごと フォロワー数 最新':
     output_file('followers_data_new.html')
-    show(fig4)
+    save(fig4)
     st.bokeh_chart(fig4, use_container_width=True)
+    with open("followers_data_new.html", "rb") as fp:
+        btn = st.download_button(label="Download Fig", data=fp, file_name="followers_data_new.html", mime="text/html")
     st.markdown('''
     ***
     ''')
@@ -293,6 +320,14 @@ st.title('Twitterアナリティクスのデータ：月間更新')
 st.write('Twitterアナリティクスの月ごとデータ(2017/04-2021/09)')
 
 st.dataframe(df_month, width=1200, height=400)
+
+csv3 = convert_df(df_month)
+st.download_button("Download CSV", csv3, "monthly_data.csv", "text/csv")
+
+st.markdown('''
+***
+''')
+
 
 # 過去のグラフ作成用の辞書
 x = df_month.index
@@ -362,10 +397,12 @@ p4.legend.location = 'top_left'
 
 
 if genre == '月間インプレッション フォロワー':
-    output_file('tweet_monthly.html')
+    output_file('monthly_data.html')
     fig5 = column(p1, p2, p3, p4)
-    show(fig5)
+    save(fig5)
     st.bokeh_chart(fig5, use_container_width=False)
+    with open("monthly_data.html", "rb") as fp:
+        btn = st.download_button(label="Download Fig", data=fp, file_name="monthly_data.html", mime="text/html")
     st.markdown('''
     ***
     ''')
@@ -377,6 +414,14 @@ st.write('Twitterアナリティクスのツイートごとデータ(2020/10-202
 time_index_df = tweets_df.sort_values(by='時間').set_index('時間')
 time_index_df = time_index_df.drop('Unnamed: 0', axis=1)
 st.dataframe(time_index_df, width=1200, height=400)
+
+csv4 = convert_df(time_index_df)
+st.download_button("Download CSV", csv4, "tweet_data.csv", "text/csv")
+
+st.markdown('''
+***
+''')
+
 
 # グラフ作成用の辞書
 x = time_index_df.index
@@ -434,8 +479,10 @@ select1.toolbar.active_multi = range_tool
 if genre == 'ツイートごとインプレッション数':
     output_file('impression.html')
     fig6 = column(p1, select1)
-    show(fig6)
+    save(fig6)
     st.bokeh_chart(fig6, use_container_width=False)
+    with open("impression.html", "rb") as fp:
+        btn = st.download_button(label="Download Fig", data=fp, file_name="impression.html", mime="text/html")
     st.markdown('''
     ***
     ''')
@@ -447,9 +494,13 @@ time_df = tweets_df[["時刻", "ツイート本文", "インプレッション",
 
 st.dataframe(time_df, width=1200, height=400)
 
+csv5 = convert_df(time_df)
+st.download_button("Download CSV", csv5, "hourly_data.csv", "text/csv")
+
 st.markdown('''
 ***
 ''')
+
 
 # 1パーセンタイル、99パーセンタイルを指定
 q_min = time_df['インプレッション'].quantile(0.01) 
@@ -466,6 +517,14 @@ df_mean = new_time_df.groupby(["時刻"]).mean()
 
 st.write('Twitterアナリティクスのツイートデータ(時刻ごと平均)(2020/10-2021/09)')
 st.dataframe(df_mean, width=1200, height=400)
+
+csv6 = convert_df(df_mean)
+st.download_button("Download CSV", csv6, "hourly_mean.csv", "text/csv")
+
+st.markdown('''
+***
+''')
+
 
 # グラフ作成用の辞書
 x = df_mean.index
@@ -515,10 +574,12 @@ p4.legend.location = 'top_left'
 
 # 描画
 if genre == '時刻ごとインプレッション数':
-    output_file('tweet_hour_data.html')
+    output_file('hourly_data.html')
     fig7 = column(p1, p2, p3, p4)
-    show(fig7)
+    save(fig7)
     st.bokeh_chart(fig7, use_container_width=False)
+    with open("hourly_data.html", "rb") as fp:
+        btn = st.download_button(label="Download Fig", data=fp, file_name="hourly_data.html", mime="text/html")
     st.markdown('''
     ***
     ''')
