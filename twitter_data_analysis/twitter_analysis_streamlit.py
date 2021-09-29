@@ -87,12 +87,6 @@ tweets_df = load_data4()
 data_load_state.text('Loading data...Done!')
 
 
-# クリアをチェックするとキャッシュをクリア
-st.write('最新データに更新したい場合は「Clear cache」をチェック。更新後はチェックを外してください。')
-if st.checkbox('Clear cache'):
-    caching.clear_cache()
-
-
 st.write('ツイートごとのデータ (2017/4～最新更新)')
 
 df_index = df.sort_index(ascending=False)
