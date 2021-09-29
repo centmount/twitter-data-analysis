@@ -153,7 +153,7 @@ genre = st.sidebar.radio(
 if genre == 'フォロワー数 最新':
     save(fig1)
     st.bokeh_chart(fig1, use_container_width=False)
-    with open("followers_new.html", "rb") as fp:
+    with open("followers_new.html", "r") as fp:
         btn = st.download_button(label="Download Fig", data=fp, file_name="followers_new.html", mime="text/html")
     st.markdown('''
     ***
