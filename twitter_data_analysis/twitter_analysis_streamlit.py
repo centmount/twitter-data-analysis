@@ -117,6 +117,8 @@ source = ColumnDataSource(data = dict(x = x, y = y, date=date))
 # tooltips設定
 hover_tool = HoverTool(tooltips = [('date and time', '@date'), ('followers', '@y')], mode='mouse')
 
+output_file('followers_new.html')
+
 # グラフ全体の設定
 fig1 = figure(tools=[hover_tool], title='最新フォロワー数', plot_width=800, plot_height=400, 
            x_axis_label='date', y_axis_label='followers', x_axis_type='datetime', background_fill_color='DarkGreen')
@@ -149,7 +151,6 @@ genre = st.sidebar.radio(
 
 # 描画
 if genre == 'フォロワー数 最新':
-    output_file('followers_new.html')
     save(fig1)
     st.bokeh_chart(fig1, use_container_width=False)
     with open("followers_new.html", "rb") as fp:
