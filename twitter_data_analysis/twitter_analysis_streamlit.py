@@ -181,10 +181,10 @@ x_format = "%Y/%m/%d"
 p.xaxis.formatter = DatetimeTickFormatter(days=[x_format], months=[x_format], years=[x_format])
 
 # 折れ線図
-p.line('x', 'y', legend_label='「いいね」数', source=source, color='yellow')
+p.line('x', 'y', legend_label='「いいね」数', source=source, color='Magenta')
 
 # 散布図
-p.asterisk('x', 'y', size=10, fill_alpha=0.5, source=source, color='yellow')
+p.asterisk('x', 'y', size=10, fill_alpha=0.5, source=source, color='Magenta')
 
 # 凡例の位置
 p.legend.location = 'top_left'
