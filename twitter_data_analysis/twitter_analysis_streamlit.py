@@ -143,13 +143,6 @@ if genre == 'フォロワー数 最新':
     st.markdown('''
     ***
     ''')
-    with open("followers_new.html", "rb") as fig1:
-        btn = st.download_button(
-        label="Download Fig1",
-        data=fig1,
-        file_name="followers_new.html",
-        mime="html")
-        
 
 
 # ツイート時間でグループ分け
