@@ -51,29 +51,28 @@ FILE_PATH_4 = st.secrets['file_path_4']
 
 
 st.title('Twitterデータ分析')
-st.write('最新データに更新されていない場合、右上メニュー[Clear cache]を押してから[Rerun]を押して下さい')
 
 # csvファイルをpandasで読み取り
-@st.cache
+@st.cache(ttl=3600)
 def load_data():
     df = pd.read_csv(FILE_PATH_1)
     df['save_time'] = pd.to_datetime(df['save_time'])
     df['created_at'] = pd.to_datetime(df['created_at'])
     return df
 
-@st.cache
+@st.cache(ttl=3600)
 def load_data2():
     df_followers = pd.read_csv(FILE_PATH_2)
     return df_followers
 
-@st.cache
+@st.cache(ttl=3600)
 def load_data3():
     df_month = pd.read_csv(FILE_PATH_3)
     df_month['日時'] = pd.to_datetime(df_month['日時'])
     df_month = df_month.set_index('日時')
     return df_month
 
-@st.cache
+@st.cache(ttl=3600)
 def load_data4():
     tweets_df = pd.read_csv(FILE_PATH_4)
     tweets_df['時間'] = pd.to_datetime(tweets_df['時間'])
@@ -137,9 +136,10 @@ genre = st.sidebar.radio(
 
 # 描画
 if genre == 'フォロワー数 最新':
-    output_file('followers_new.html')
+    # output_file('followers_new.html')
     show(fig1)
     st.bokeh_chart(fig1, use_container_width=False)
+    st.download_button('followers_new.html', fig1)
     st.markdown('''
     ***
     ''')
