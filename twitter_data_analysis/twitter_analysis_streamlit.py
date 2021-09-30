@@ -341,9 +341,12 @@ st.markdown('''
 ***
 ''')
 
+# 横棒グラフで上から順になるようにソート
+df_wordrank_sort = df_wordrank_new.sort_index(ascending=False)
+
 # フォロワーのプロフィール欄ランキンググラフ作成用の辞書
-y = df_wordrank_new['word']
-x = df_wordrank_new['count']
+y = df_wordrank_sort['word']
+x = df_wordrank_sort['count']
 source = ColumnDataSource(data = dict(x = x, y = y))
 
 # tooltips設定
