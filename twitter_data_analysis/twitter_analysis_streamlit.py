@@ -115,12 +115,12 @@ date = x.strftime('%Y-%m-%d %H:%M:%S')
 source = ColumnDataSource(data = dict(x = x, y = y, date=date))
 
 # tooltips設定
-hover_tool = HoverTool(tooltips = [('date and time', '@date'), ('followers', '@y')], mode='mouse')
+TOOLTIPS = [('date and time', '@date'), ('followers', '@y')]
 
 output_file('followers_new.html')
 
 # グラフ全体の設定
-fig1 = figure(tools=[hover_tool], tools = "pan, wheel_zoom, box_zoom, reset, save",
+fig1 = figure(tools = "hover, pan, wheel_zoom, box_zoom, reset, save", tooltips=TOOLTIPS,
            title='最新フォロワー数', plot_width=800, plot_height=400, 
            x_axis_label='date', y_axis_label='followers', x_axis_type='datetime', background_fill_color='DarkGreen')
 
