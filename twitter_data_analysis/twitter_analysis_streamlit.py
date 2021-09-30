@@ -438,7 +438,7 @@ TOOLTIPS_5 = [('date', '@date'), ('Impressiion', '@y')]
 TOOLTIPS_6 = [('date', '@date'), ('Engagement', '@y2')]
 
 # グラフ全体の設定
-p1 = figure(tools = "hover, save", tooltips=[TOOLTIPS_5, TOOLTIPS_6], title='インプレッション数とエンゲージメント数 (ツイートごと)  2020年10月～2021年9月',
+p1 = figure(tools = "hover, save", tooltips=(TOOLTIPS_5, TOOLTIPS_6), title='インプレッション数とエンゲージメント数 (ツイートごと)  2020年10月～2021年9月',
             plot_width=800, plot_height=400, x_axis_label='date', y_axis_label='Impression', x_axis_type='datetime',
            x_range = [x[0], x[-1]], y_range= [0, 100000], background_fill_color='Navy')
 
