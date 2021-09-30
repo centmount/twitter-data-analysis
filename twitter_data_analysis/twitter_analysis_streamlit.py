@@ -330,10 +330,11 @@ if genre == 'フォロワーごと フォロワー数 最新':
 
 
 st.write('フォロワー プロフィール欄の頻出ワードランキング (2017/4～) :google colabで分析')
-df_wordrank.set_axis(['word', 'count'], axis=1)
-st.dataframe(df_wordrank, width=1000, height=600)
+df_wordrank_new = df_wordrank.set_axis(['word', 'count'], axis=1)
 
-csv3 = convert_df(df_wordrank)
+st.dataframe(df_wordrank_new, width=1000, height=600)
+
+csv3 = convert_df(df_wordrank_new)
 st.download_button("Download CSV", csv3, "followers_wordrank", "text/csv")
 
 st.markdown('''
@@ -341,8 +342,8 @@ st.markdown('''
 ''')
 
 # フォロワーのプロフィール欄ランキンググラフ作成用の辞書
-y = df_wordrank['word']
-x = df_wordrank['count']
+y = df_wordrank_new['word']
+x = df_wordrank_new['count']
 source = ColumnDataSource(data = dict(x = x, y = y))
 
 # tooltips設定
