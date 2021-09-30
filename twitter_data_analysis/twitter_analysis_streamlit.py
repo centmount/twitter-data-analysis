@@ -120,7 +120,7 @@ TOOLTIPS = [('date and time', '@date'), ('followers', '@y')]
 output_file('followers_new.html')
 
 # グラフ全体の設定
-fig1 = figure(tools = "hover, pan, wheel_zoom, box_zoom, reset, save", tooltips=TOOLTIPS,
+fig1 = figure(tools = "hover, save", tooltips=TOOLTIPS,
            title='最新フォロワー数', plot_width=800, plot_height=400, 
            x_axis_label='date', y_axis_label='followers', x_axis_type='datetime', background_fill_color='DarkGreen')
 
@@ -171,10 +171,10 @@ date = x.astype(str)
 source = ColumnDataSource(data = dict(x=x, y=y, date=date))
 
 # tooltips設定
-hover_tool = HoverTool(tooltips = [('ツイート日時', '@date'), ('いいね数', '@y')], mode='mouse')
+TOOLTIPS = [('ツイート日時', '@date'), ('いいね数', '@y')]
 
 # グラフ全体の設定
-p = figure(tools=[hover_tool], title='ツイートごとの「いいね数」 (2017/4～最新更新)', plot_width=800, plot_height=400,
+p = figure(tools = "hover, save", tooltips=TOOLTIPS, title='ツイートごとの「いいね数」 (2017/4～最新更新)', plot_width=800, plot_height=400,
            x_range = [x[0], x[-1]], x_axis_label='ツイート日時', y_axis_label='favorited', x_axis_type='datetime', background_fill_color='DarkGreen')
 
 # X軸の設定
@@ -233,15 +233,15 @@ y2 = df_hour['retweeted'].astype(int)
 source = ColumnDataSource(data = dict(x = x, y = y, y2=y2))
 
 # tooltips設定
-hover_tool_1 = HoverTool(tooltips = [('時刻', '@x'), ('いいね数', '@y')], mode='mouse')
-hover_tool_2 = HoverTool(tooltips = [('時刻', '@x'), ('リツイート数', '@y2')], mode='mouse')
+TOOLTIPS1 = [('時刻', '@x'), ('いいね数', '@y')]
+TOOLTIPS2 = [('時刻', '@x'), ('リツイート数', '@y2')]
 
 # グラフ全体の設定
-p1 = figure(tools=[hover_tool_1], title='いいね数 (時刻ごと平均)  2017年4月～最新更新',
+p1 = figure(tools = "hover, save", tooltips=TOOLTIPS1, title='いいね数 (時刻ごと平均)  2017年4月～最新更新',
             plot_width=800, plot_height=400, x_axis_label='hour', y_axis_label='いいね数',
             background_fill_color='DarkGreen')
 
-p2 = figure(tools=[hover_tool_2], title='リツイート数 (時刻ごと平均)  2017年4月～最新更新',
+p2 = figure(tools = "hover, save", tooltips=TOOLTIPS2, title='リツイート数 (時刻ごと平均)  2017年4月～最新更新',
             plot_width=800, plot_height=400, x_axis_label='hour', y_axis_label='リツイート数',
             background_fill_color='DarkGreen')
 
@@ -291,10 +291,10 @@ y = df_followers_mean['friends_count']
 source = ColumnDataSource(data = dict(x = x, y = y))
 
 # tooltips設定
-hover_tool_1 = HoverTool(tooltips = [('フォロワー数', '@x'), ('フォロー数', '@y')], mode='mouse')
+TOOLTIPS4 = [('フォロワー数', '@x'), ('フォロー数', '@y')]
 
 # グラフ全体の設定
-fig4 = figure(tools=[hover_tool_1], title='フォロワーごとの「フォロワー数」「フォロー数」(2017/4～最新更新)',
+fig4 = figure(tools = "hover, save", tooltips=TOOLTIPS4, title='フォロワーごとの「フォロワー数」「フォロー数」(2017/4～最新更新)',
             plot_width=800, plot_height=400, x_axis_label='フォロワー数', y_axis_label='フォロー数',
             background_fill_color='Darkgreen')
 
@@ -343,25 +343,25 @@ date2 = x.strftime('%Y-%m')
 source = ColumnDataSource(data = dict(x = x, y = y, y2=y2, y3=y3, y4=y4, date=date, date2=date2))
 
 # tooltips設定
-hover_tool_1 = HoverTool(tooltips = [('date', '@date'), ('followers', '@y')], mode='mouse')
-hover_tool_2 = HoverTool(tooltips = [('date', '@date2'), ('Impression', '@y2')], mode='mouse')
-hover_tool_3 = HoverTool(tooltips = [('date', '@date2'), ('Tweets', '@y3')], mode='mouse')
-hover_tool_4 = HoverTool(tooltips = [('date', '@date2'), ('Profile Access', '@y4')], mode='mouse')
+TOOLTIPS_1 = [('date', '@date'), ('followers', '@y')]
+TOOLTIPS_2 = [('date', '@date2'), ('Impression', '@y2')]
+TOOLTIPS_3 = [('date', '@date2'), ('Tweets', '@y3')]
+TOOLTIPS_4 = [('date', '@date2'), ('Profile Access', '@y4')]
 
 # グラフ全体の設定
-p1 = figure(tools=[hover_tool_1], title='月ごとフォロワー数(2017/4-2021/9)', plot_width=800, plot_height=400, 
+p1 = figure(tools = "hover, save", tooltips=TOOLTIPS_1, title='月ごとフォロワー数(2017/4-2021/9)', plot_width=800, plot_height=400, 
            x_axis_label='date', y_axis_label='followers', x_axis_type='datetime',
            background_fill_color='Navy')
 
-p2 = figure(tools=[hover_tool_2], title='月間インプレッション数(2017/4-2021/9 Monthly)', plot_width=800, plot_height=400, 
+p2 = figure(tools = "hover, save", tooltips=TOOLTIPS_2, title='月間インプレッション数(2017/4-2021/9 Monthly)', plot_width=800, plot_height=400, 
            x_axis_label='date', y_axis_label='Impression', x_axis_type='datetime',
            background_fill_color='Navy')
 
-p3 = figure(tools=[hover_tool_3], title='月間ツイート数(2017/4-2021/9 Monthly)', plot_width=800, plot_height=400, 
+p3 = figure(tools = "hover, save", tooltips=TOOLTIPS_3, title='月間ツイート数(2017/4-2021/9 Monthly)', plot_width=800, plot_height=400, 
            x_axis_label='date', y_axis_label='Tweets', x_axis_type='datetime',
            background_fill_color='Navy')
 
-p4 = figure(tools=[hover_tool_4], title='月間プロフィールアクセス数(2017/4-2021/9 Monthly)', plot_width=800, plot_height=400, 
+p4 = figure(tools = "hover, save", tooltips=TOOLTIPS_4, title='月間プロフィールアクセス数(2017/4-2021/9 Monthly)', plot_width=800, plot_height=400, 
            x_axis_label='date', y_axis_label='Profile Access', x_axis_type='datetime',
            background_fill_color='Navy')
 
@@ -434,11 +434,11 @@ y2 = time_index_df['エンゲージメント']
 source = ColumnDataSource(data = dict(x = x, y = y, y2=y2, date=date))
 
 # tooltips設定
-hover_tool_1 = HoverTool(tooltips = [('date', '@date'), ('Impressiion', '@y')], mode='mouse')
-hover_tool_2 = HoverTool(tooltips = [('date', '@date'), ('Engagement', '@y2')], mode='mouse')
+TOOLTIPS_5 = [('date', '@date'), ('Impressiion', '@y')]
+TOOLTIPS_6 = [('date', '@date'), ('Engagement', '@y2')]
 
 # グラフ全体の設定
-p1 = figure(tools=[hover_tool_1, hover_tool_2], title='インプレッション数とエンゲージメント数 (ツイートごと)  2020年10月～2021年9月',
+p1 = figure(tools = "hover, save", tooltips=[TOOLTIPS_5, TOOLTIPS_6], title='インプレッション数とエンゲージメント数 (ツイートごと)  2020年10月～2021年9月',
             plot_width=800, plot_height=400, x_axis_label='date', y_axis_label='Impression', x_axis_type='datetime',
            x_range = [x[0], x[-1]], y_range= [0, 100000], background_fill_color='Navy')
 
@@ -539,25 +539,25 @@ y4 = df_count['インプレッション']
 source = ColumnDataSource(data = dict(x = x, x4=x4, y = y, y2=y2, y3=y3, y4=y4))
 
 # tooltips設定
-hover_tool_1 = HoverTool(tooltips = [('hour', '@x'), ('Impressiion', '@y')], mode='mouse')
-hover_tool_2 = HoverTool(tooltips = [('hour', '@x'), ('Engagement', '@y2')], mode='mouse')
-hover_tool_3 = HoverTool(tooltips = [('hour', '@x'), ('Profile Access', '@y3')], mode='mouse')
-hover_tool_4 = HoverTool(tooltips = [('hour', '@x4'), ('Tweet', '@y4')], mode='mouse')
+TOOLTIPS_11 = [('hour', '@x'), ('Impressiion', '@y')]
+TOOLTIPS_12 = [('hour', '@x'), ('Engagement', '@y2')]
+TOOLTIPS_13 = [('hour', '@x'), ('Profile Access', '@y3')]
+TOOLTIPS_14 = [('hour', '@x4'), ('Tweet', '@y4')]
 
 # グラフ全体の設定
-p1 = figure(tools=[hover_tool_1], title='インプレッション数 (時刻ごと平均)  2020年10月～2021年9月 ※外れ値を処理',
+p1 = figure(tools = "hover, save", tooltips=TOOLTIPS_11, title='インプレッション数 (時刻ごと平均)  2020年10月～2021年9月 ※外れ値を処理',
             plot_width=800, plot_height=400, x_axis_label='hour', y_axis_label='Impression',
             background_fill_color='Navy')
 
-p2 = figure(tools=[hover_tool_2], title='エンゲージメント数 (時刻ごと平均)  2020年10月～2021年9月 ※外れ値を処理',
+p2 = figure(tools = "hover, save", tooltips=TOOLTIPS_12, title='エンゲージメント数 (時刻ごと平均)  2020年10月～2021年9月 ※外れ値を処理',
             plot_width=800, plot_height=400, x_axis_label='hour', y_axis_label='Engagement',
             background_fill_color='Navy')
 
-p3 = figure(tools=[hover_tool_3], title='プロフィールアクセス数 (時刻ごと平均)  2020年10月～2021年9月 ※外れ値を処理',
+p3 = figure(tools = "hover, save", tooltips=TOOLTIPS_13, title='プロフィールアクセス数 (時刻ごと平均)  2020年10月～2021年9月 ※外れ値を処理',
             plot_width=800, plot_height=400, x_axis_label='hour', y_axis_label='Profile Access',
             background_fill_color='Navy')
 
-p4 = figure(tools=[hover_tool_4], title='ツイート数 (時刻ごと件数)  2020年10月～2021年9月 ※外れ値を処理',
+p4 = figure(tools = "hover, save", tooltips=TOOLTIPS_14, title='ツイート数 (時刻ごと件数)  2020年10月～2021年9月 ※外れ値を処理',
             plot_width=800, plot_height=400, x_axis_label='hour', y_axis_label='Tweet',
             background_fill_color='Navy')
 
