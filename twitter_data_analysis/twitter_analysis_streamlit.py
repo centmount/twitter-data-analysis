@@ -434,11 +434,11 @@ y2 = time_index_df['エンゲージメント']
 source = ColumnDataSource(data = dict(x = x, y = y, y2=y2, date=date))
 
 # tooltips設定
-TOOLTIPS_5 = [('date', '@date'), ('Impressiion', '@y')]
-TOOLTIPS_6 = [('date', '@date'), ('Engagement', '@y2')]
+hover_tool_5 = HoverTool(tooltips = [('date', '@date'), ('Impressiion', '@y')], mode='mouse')
+hover_tool_6 = HoverTool(tooltips = [('date', '@date'), ('Engagement', '@y2')], mode='mouse')
 
 # グラフ全体の設定
-p1 = figure(tools = "hover, save", tooltips=(TOOLTIPS_5, TOOLTIPS_6), title='インプレッション数とエンゲージメント数 (ツイートごと)  2020年10月～2021年9月',
+p1 = figure(tools=[hover_tool_5, hover_tool_6], title='インプレッション数とエンゲージメント数 (ツイートごと)  2020年10月～2021年9月',
             plot_width=800, plot_height=400, x_axis_label='date', y_axis_label='Impression', x_axis_type='datetime',
            x_range = [x[0], x[-1]], y_range= [0, 100000], background_fill_color='Navy')
 
