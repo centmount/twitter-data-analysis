@@ -2,7 +2,7 @@
 
 """
 Twitter APIから取得したcsvデータから分析。
-フォロワー数、いいね数、リツイート数をグラフ表示。
+フォロワー数、いいね数、リツイート数などをグラフ表示。
 streamlitを使ったwebアプリです。
 """
 
@@ -24,6 +24,7 @@ import time
 
 st.set_page_config(layout="wide")
 
+# パスワードはstreamlitのシークレットに保存
 # パスワード入力
 def login():
     value = st.sidebar.text_input('パスワードを入力してください:', type='password')
@@ -37,18 +38,21 @@ login()
 # 現在時刻
 now_time = datetime.now() + timedelta(hours=9)
 
+# ファイルパスはstreamlitのシークレットに保存
 # ツイートごとAPIデータへのファイルのパス
-FILE_PATH_1 = st.secrets['file_path']
+FILE_PATH_1 = st.secrets['file_path']  # APIツイートデータからGCPでcsvファイルを定時更新
 
 # フォロワー詳細データファイル読み込み
-FILE_PATH_2 = st.secrets['file_path_2']
+FILE_PATH_2 = st.secrets['file_path_2']  # APIフォロワーデータからGCPでcsvファイルを定時更新
 
 # Twitterアナリティクスの月ごとデータ(2017/04-2021/09)
-FILE_PATH_3 = st.secrets['file_path_3']
+FILE_PATH_3 = st.secrets['file_path_3']  # TwitterAnalyticsデータをgoogle colabでcsvに保存
 
 # Twitterアナリティクスのツイートごとデータ(2020/10-2021/09)
-FILE_PATH_4 = st.secrets['file_path_4']
+FILE_PATH_4 = st.secrets['file_path_4']  # TwitterAnalyticsデータをgoogle colabでcsv保存
 
+# フォロワー詳細データをmacabで形態素解析したキーワードランキング
+FILE_PATH_5 = st.secrets['file_path_5']  # APIフォロワーデータをgoogle colabでキーワード分析しcsvに保存
 
 st.title('Twitterデータ分析')
 
@@ -78,12 +82,19 @@ def load_data4():
     tweets_df['時間'] = pd.to_datetime(tweets_df['時間'])
     return tweets_df
 
+@st.cache(ttl=3600)
+def load_data5():
+    df_wordrank = pd.read_csv(FILE_PATH_5)
+    return df_wordrank
+
+
 # データ読取実行
 data_load_state = st.text('Loading data...')
 df = load_data()
 df_followers = load_data2()
 df_month = load_data3()
 tweets_df = load_data4()
+df_wordrank = load_data5()
 data_load_state.text('Loading data...Done!')
 
 
@@ -145,6 +156,7 @@ genre = st.sidebar.radio(
       'ツイートごと いいね数 最新', 
       '時刻ごと いいね数 最新',
       'フォロワーごと フォロワー数 最新',
+      'フォロワー 頻出ワードランク',       
       '月間インプレッション フォロワー',
       'ツイートごとインプレッション数',
       '時刻ごとインプレッション数'
@@ -311,6 +323,47 @@ if genre == 'フォロワーごと フォロワー数 最新':
     st.bokeh_chart(fig4, use_container_width=True)
     with open("followers_data_new.html", "rb") as fp:
         btn = st.download_button(label="Download Fig", data=fp, file_name="followers_data_new.html", mime="text/html")
+    st.markdown('''
+    ***
+    ''')
+
+
+
+st.write('フォロワー プロフィール欄の頻出ワードランキング (2017/4～) :google colabで分析')
+
+st.dataframe(df_wordrank, width=1000, height=600)
+
+csv3 = convert_df(df_wordrank)
+st.download_button("Download CSV", csv3, "followers_wordrank", "text/csv")
+
+st.markdown('''
+***
+''')
+
+# フォロワーのプロフィール欄ランキンググラフ作成用の辞書
+y = df_wordrank.index
+x = df_wordrank['count']
+source = ColumnDataSource(data = dict(x = x, y = y))
+
+# tooltips設定
+TOOLTIPS = [('キーワード', '@y'), ('回数', '@x')]
+
+output_file('follower_wordrank.html')
+
+# グラフ全体の設定
+fig_word = figure(tools = "hover, save", tooltips=TOOLTIPS, title='フォロワー プロフィール欄の頻出ワード (2017/4～)',
+            plot_width=800, plot_height=800, x_axis_label='回数', y_axis_label='word',
+            background_fill_color='Navy')
+
+fig_word.hbar(y='y', height=0.5, left=0, right='x', source=source, color='Lime')
+
+
+# 描画
+if genre == 'フォロワー 頻出ワードランク':
+    save(fig_word)
+    st.bokeh_chart(fig_word, use_container_width=False)
+    with open("follower_wordrank.html", "rb") as fp:
+        btn = st.download_button(label="Download Fig", data=fp, file_name="follower_wordrank.html", mime="text/html")
     st.markdown('''
     ***
     ''')
