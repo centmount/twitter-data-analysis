@@ -353,7 +353,7 @@ output_file('follower_wordrank.html')
 
 # グラフ全体の設定
 fig_word = figure(tools = "hover, save", tooltips=TOOLTIPS, title='フォロワー プロフィール欄の頻出ワード (2017/4～)',
-            plot_width=800, plot_height=800, x_axis_label='回数', y_axis_label='word',
+            plot_width=800, plot_height=800, x_axis_label='回数', y_axis_label='word', y_range=y,
             background_fill_color='Navy')
 
 fig_word.hbar(y='y', height=0.5, left=0, right='x', source=source, color='Lime')
