@@ -495,7 +495,7 @@ hover_tool_5 = HoverTool(tooltips = [('date', '@date'), ('Impressiion', '@y')], 
 hover_tool_6 = HoverTool(tooltips = [('date', '@date'), ('Engagement', '@y2')], mode='mouse')
 
 # グラフ全体の設定
-p1 = figure(tools=[hover_tool_5, hover_tool_6], title='インプレッション数とエンゲージメント数 (ツイートごと)  2020年10月～2021年9月',
+p1 = figure(tools=[hover_tool_6, hover_tool_5], title='インプレッション数とエンゲージメント数 (ツイートごと)  2020年10月～2021年9月',
             plot_width=800, plot_height=400, x_axis_label='date', y_axis_label='Impression', x_axis_type='datetime',
            x_range = [x[0], x[-1]], y_range= [0, 100000], background_fill_color='Navy')
 
