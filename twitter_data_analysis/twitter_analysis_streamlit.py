@@ -115,9 +115,15 @@ st.markdown('''
 ***
 ''')
 
+st.write('フォロワー数の推移 (12時間ごと更新)')
 
 # 保存時間でグループ分け
 df_save_time = df.groupby('save_time').mean()
+st.dataframe(df_save_time, width=1200, height=400)
+
+st.markdown('''
+***
+''')
 
 # フォロワー数グラフ作成用の辞書
 x = df_save_time.index
