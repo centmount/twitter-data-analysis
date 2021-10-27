@@ -119,7 +119,8 @@ st.write('フォロワー数の推移 (12時間ごと更新)')
 
 # 保存時間でグループ分け
 df_save_time = df.groupby('save_time').mean()
-st.dataframe(df_save_time, width=1200, height=400)
+df_followers = df_save_time['followers']sort_index(ascending=False) 
+st.dataframe(df_followers, width=1200, height=400)
 
 st.markdown('''
 ***
