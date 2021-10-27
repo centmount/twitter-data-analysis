@@ -119,8 +119,12 @@ st.write('フォロワー数の推移 (12時間ごと更新)')
 
 # 保存時間でグループ分け
 df_save_time = df.groupby('save_time').mean()
-df_followers = df_save_time['followers'].sort_index(ascending=False) 
+df_followers = df_save_time['followers'].astype('int').sort_index(ascending=False) 
 st.dataframe(df_followers, width=1200, height=400)
+
+# 表をCSVでダウンロード
+csv1_1 = convert_df(df_followers)
+st.download_button("Download CSV", csv1_1, "followers_new.csv", "text/csv")
 
 st.markdown('''
 ***
