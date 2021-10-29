@@ -139,8 +139,6 @@ source = ColumnDataSource(data = dict(x = x, y = y, date=date))
 # tooltips設定
 TOOLTIPS = [('date and time', '@date'), ('followers', '@y')]
 
-output_file('followers_new.html')
-
 # グラフ全体の設定
 fig1 = figure(tools = "hover, save", tooltips=TOOLTIPS,
            title='最新フォロワー数', plot_width=800, plot_height=400, 
@@ -175,6 +173,7 @@ genre = st.sidebar.radio(
 
 # 描画
 if genre == 'フォロワー数 最新':
+    output_file('followers_num_new.html')
     save(fig1)
     st.bokeh_chart(fig1, use_container_width=False)
     with open("followers_num_new.html", "rb") as fp:
