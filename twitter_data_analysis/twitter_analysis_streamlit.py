@@ -124,7 +124,7 @@ st.dataframe(df_followers, width=1200, height=400)
 
 # 表をCSVでダウンロード
 csv1_1 = convert_df(df_followers)
-st.download_button("Download CSV", csv1_1, "followers_new.csv", "text/csv")
+st.download_button("Download CSV", csv1_1, "followers_table_data_new.csv", "text/csv")
 
 st.markdown('''
 ***
