@@ -104,7 +104,7 @@ df_index = df.sort_index(ascending=False)
 st.dataframe(df_index, width=1200, height=400)
 
 # 表をCSVでダウンロード
-@st.cache
+@st.cache(ttl=3600)
 def convert_df(df):
     return df.to_csv().encode('utf-8')
 
