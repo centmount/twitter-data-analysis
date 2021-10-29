@@ -119,12 +119,12 @@ st.write('フォロワー数の推移 (12時間ごと更新)')
 
 # 保存時間でグループ分け
 df_save_time = df.groupby('save_time').mean()
-df_followers = df_save_time['followers'].astype('int').sort_index(ascending=False) 
-st.dataframe(df_followers, width=1200, height=400)
+df_followers_num = df_save_time['followers'].astype('int').sort_index(ascending=False) 
+st.dataframe(df_followers_num, width=1200, height=400)
 
 # 表をCSVでダウンロード
-csv1_1 = convert_df(df_followers)
-st.download_button("Download CSV", csv1_1, "followers_table_data_new.csv", "text/csv")
+csv1_1 = convert_df(df_followers_num)
+st.download_button("Download CSV", csv1_1, "followers_num_new.csv", "text/csv")
 
 st.markdown('''
 ***
@@ -177,8 +177,8 @@ genre = st.sidebar.radio(
 if genre == 'フォロワー数 最新':
     save(fig1)
     st.bokeh_chart(fig1, use_container_width=False)
-    with open("followers_new.html", "rb") as fp:
-        btn = st.download_button(label="Download Fig", data=fp, file_name="followers_new.html", mime="text/html")
+    with open("followers_data_new.html", "rb") as fp:
+        btn = st.download_button(label="Download Fig", data=fp, file_name="followers_data_new.html", mime="text/html")
     st.markdown('''
     ***
     ''')
