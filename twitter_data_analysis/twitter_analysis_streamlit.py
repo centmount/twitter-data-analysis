@@ -9,8 +9,6 @@ streamlitを使ったwebアプリです。
 # 必要なモジュールのインストール
 import streamlit as st
 from streamlit import caching
-from matplotlib import pyplot as plt
-import matplotlib.dates as mdates
 
 import pandas as pd
 from bokeh.io import show, save
