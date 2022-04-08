@@ -22,6 +22,8 @@ from datetime import datetime, timedelta
 import os
 import time
 
+from jinja2.utils import markupsafe
+
 st.set_page_config(layout="wide")
 
 # パスワードはstreamlitのシークレットに保存
